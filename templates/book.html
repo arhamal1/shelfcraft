@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<p><a href="/books">back to list</a></p>
+<h1>{{ b["title"] }}</h1>
+<p>Pages: {{ b["pages"] or "?" }} | Status: {{ b["status"] }}</p>
+
+<h2>Add reading log</h2>
+<form method="post" action="/book/{{ b['id'] }}/log">
+  <label>Date yyyy-mm-dd optional: <input name="date" placeholder="2025-10-19"></label>
+  <label>Pages read: <input name="pages_read" type="number" min="1" required></label>
+  <button type="submit">Add log</button>
+</form>
+
+<h2>Logs</h2>
+<p>Total pages logged: {{ total_logged }}</p>
+{% if logs %}
+  <ul>
+    {% for l in logs %}
+      <li>{{ l["date"] }} — {{ l["pages_read"] }} pages</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No logs yet.</p>
+{% endif %}
+{% endblock %}

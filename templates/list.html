@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Your books</h1>
+<p><a href="/add">add a book</a></p>
+{% if books %}
+  <table cellpadding="6">
+    <tr><th>ID</th><th>Title</th><th>Pages</th><th>Status</th><th>Actions</th></tr>
+    {% for b in books %}
+      <tr>
+        <td>{{ b["id"] }}</td>
+        <td><a href="/book/{{ b['id'] }}">{{ b["title"] }}</a></td>
+        <td>{{ b["pages"] or "" }}</td>
+        <td>{{ b["status"] }}</td>
+        <td>
+          <a href="/edit/{{ b['id'] }}">edit</a>
+          <form method="post" action="/delete/{{ b['id'] }}" style="display:inline" onsubmit="return confirm('Delete this book?')">
+            <button type="submit">delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No books yet. <a href="/add">add one</a></p>
+{% endif %}
+{% endblock %}

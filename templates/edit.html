@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit book {{ b["id"] }}</h1>
+<p><a href="/books">back to list</a></p>
+<form method="post">
+  <label>Title: <input name="title" value="{{ b['title'] }}" required></label><br>
+  <label>Pages: <input name="pages" type="number" min="1" value="{{ b['pages'] or '' }}"></label><br>
+  <label>Status:
+    <select name="status">
+      {% for s in ["to_read","reading","read"] %}
+        <option value="{{ s }}" {% if b["status"]==s %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </label><br>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}

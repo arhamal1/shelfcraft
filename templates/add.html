@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add a Book</h1>
+<form method="post" action="/add">
+  <label>Title: <input name="title" required></label><br>
+  <label>Pages: <input name="pages" type="number" min="1"></label><br>
+  <label>Status:
+    <select name="status">
+      <option value="to_read">to_read</option>
+      <option value="reading">reading</option>
+      <option value="read">read</option>
+    </select>
+  </label><br>
+  <button type="submit">Add Book</button>
+</form>
+{% endblock %}

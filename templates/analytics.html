@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Analytics</h1>
+<ul>
+  <li>Total books: {{ totals["books_count"] }}</li>
+  <li>Reading: {{ totals["reading_count"] }}</li>
+  <li>Read: {{ totals["read_count"] }}</li>
+  <li>Total pages in library: {{ totals["pages_total"] }}</li>
+  <li>Total pages logged: {{ pages_read_logged }}</li>
+</ul>
+
+<h2>Pages per day last 14 days</h2>
+{% if per_day %}
+  <table>
+    <tr><th>Date</th><th>Pages</th></tr>
+    {% for r in per_day %}
+      <tr><td>{{ r["date"] }}</td><td>{{ r["pages"] }}</td></tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No logs yet.</p>
+{% endif %}
+{% endblock %}
