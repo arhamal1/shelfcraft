@@ -1,7 +1,12 @@
+import os
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path("books.db")
+# Use Render disk if provided, else local folder
+DATA_DIR = Path(os.environ.get("DATA_DIR", "."))
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+DB_PATH = DATA_DIR / "books.db"
 
 def get_conn():
     conn = sqlite3.connect(DB_PATH)
